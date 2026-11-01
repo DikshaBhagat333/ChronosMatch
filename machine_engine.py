@@ -11,3 +11,11 @@ class Trade(NamedTuple):
     sell_id: object
     price: float
     quantity: int
+
+class MatchingEngine:
+    def __init__(self, manager=None):
+        self.manager = manager or OrderManager()
+        self._bids = []      # entries: (-price, seq, order)
+        self._asks = []      # entries: (price, seq, order)
+        self.trades: List[Trade] = []
+        self._trade_id = 0
